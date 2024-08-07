@@ -1,7 +1,6 @@
-version: '3'
 services: 
   giropops:
-    build: ~/_projetos/LINUXtips-PICK/giropops-senhas/
+    build: .
     ports: 
       - "5000:5000"
     networks:
