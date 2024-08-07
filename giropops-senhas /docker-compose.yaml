@@ -1,0 +1,20 @@
+version: '3'
+services: 
+  giropops:
+    build: ~/_projetos/LINUXtips-PICK/giropops-senhas/
+    ports: 
+      - "5000:5000"
+    networks:
+      - pick
+    environment:
+      REDIS_HOST: redis
+
+  redis:
+    image: redis
+    networks:
+      - pick
+
+networks:
+  pick:
+
+
