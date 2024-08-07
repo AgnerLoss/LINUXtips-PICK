@@ -5,9 +5,9 @@
 **Descrição do Projeto:**
 Os alunos devem criar uma aplicação de gestão de senhas baseada no projeto [giropops-senhas](https://github.com/badtuxx/giropops-senhas). O objetivo é implementar e configurar a aplicação com as tecnologias listadas, garantindo altos padrões de segurança, automação, e monitoramento.
 
-** Início **
+**Início:**
 
-src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/inicio.png">
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/inicio.png">
 
 Quarta-feira, 07 de agosto de 2024, 01:48...
 
