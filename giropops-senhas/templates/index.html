@@ -79,6 +79,11 @@
           aria-label="atualizar" onclick="buscarUltimasSenhas()">
           <span class="font-emoji">refresh</span>
         </button>
+        <button id="limpar-senhas"
+          class="ml-2 bg-red-500 rounded h-10 px-3 py-1 hover:bg-red-600 self-end mr-4 mt-4" type="button"
+          aria-label="limpar todas as senhas" onclick="limparTodasAsSenhas()">
+          <span class="font-emoji">delete_sweep</span>
+        </button>
         {% include 'lista_senhas.html' %}
     </section>
   </main>
@@ -87,5 +92,6 @@
   </footer>
 </body>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 
 </html>

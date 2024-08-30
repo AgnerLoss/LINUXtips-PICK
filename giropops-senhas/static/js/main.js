@@ -56,3 +56,27 @@ function toggleUsuarios() {
 function buscarUltimasSenhas() {
   navigation.reload();
 }
+
+function limparTodasAsSenhas() {
+  const confirmacao = confirm("Tem certeza que deseja apagar todas as senhas salvas?");
+  
+  if (confirmacao) {
+    fetch(`/apagar_todas_senhas`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('lista-senhas').innerHTML = '';
+        mostrarToast("Todas as senhas foram apagadas!");
+      } else {
+        mostrarToast("Não foi possível apagar as senhas.");
+      }
+    })
+    .catch(error => {
+      mostrarToast("Erro ao apagar as senhas: " + error);
+    });
+  }
+}
+
+
+

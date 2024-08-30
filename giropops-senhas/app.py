@@ -76,4 +76,10 @@ if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='error.log', level=logging.DEBUG)
     start_http_server(8088)
-    app.run(debug=False)
+    app.run(debug=True)  
+
+
+@app.route('/apagar_todas_senhas', methods=['DELETE'])
+def apagar_todas_senhas():
+    r.delete('senhas')
+    return jsonify({'status': 'success'}), 200
