@@ -74,14 +74,14 @@ Antes de iniciar...da aquela conferida na documentação neste sistema fantásti
 
     - eksctl  ([Doc](https://eksctl.io/))  - O eksctl é uma ferramenta de linha de comando (CLI) que permite criar e gerir clusters no Amazon Elastic Kubernetes Service (Amazon EKS). O Amazon EKS é um serviço gerenciado da Amazon Web Services (AWS) que permite executar o Kubernetes na nuvem da AWS e em datacenters locais. 
 
--> Os manifestos do kubernetes estão dividos em 06 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. 
+:love_you_gesture: Os manifestos do kubernetes estão dividos em 06 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. 
 
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/kubernetes.png">
 
 ## 2.2 Vamos começar a orquestração ... me acompanhe nesta viagem!!!! 
 
--> Com os devidos arquivos devidamente configurados, partimos para criação do Cluster no ambiente da AWS através do eksctl e posterior deploy da aplicação e demais configurações diretamente no Cluster gerenciado pela AWS. O comando para configuração do cluster está descrito a seguir. (Obs: Comando deve ser configurado com a necessidade de cada usuário). O eksctl depende das configurações do AWS CLI - ([Doc](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)) 
+:love_you_gesture: Com os devidos arquivos devidamente configurados, partimos para criação do Cluster no ambiente da AWS através do eksctl e posterior deploy da aplicação e demais configurações diretamente no Cluster gerenciado pela AWS. O comando para configuração do cluster está descrito a seguir. (Obs: Comando deve ser configurado com a necessidade de cada usuário). O eksctl depende das configurações do AWS CLI - ([Doc](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)) 
 
 ### 2.3 Configuração do cluster na AWS: 
 
