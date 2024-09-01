@@ -9,12 +9,11 @@
 *.der
 *.priv
 *.aws
-cert*
-kubernetes*
 instrucoes*
 *.txt
 docker-compose*
 *.pub
+*.teste
 # End of https://www.toptal.com/developers/gitignore/api/certificates
 
 

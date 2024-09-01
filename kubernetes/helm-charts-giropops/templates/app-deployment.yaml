@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: giropops-senhas
+  name: giropops-senhas
+spec:
+  replicas: {{ .Values.giropopsSenhas.replicas }}  # Começando com 3 réplicas para lidar com 100 requisições por segundo
+  selector:
+    matchLabels:
+      app: giropops-senhas
+  template:
+    metadata:
+      labels:
+        app: giropops-senhas
+    spec:
+      containers:
+      - image: {{ .Values.giropopsSenhas.image }}
+        name: giropops-senhas
+        resources:
+          requests:
+            memory: {{ .Values.giropopsSenhas.resources.requests.memory }}
+            cpu: {{ .Values.giropopsSenhas.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.giropopsSenhas.resources.limits.memory }}
+            cpu: {{ .Values.giropopsSenhas.resources.limits.cpu }}
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: giropops-senhas-secret # Secret criado o comando: kubectl create secret generic giropopsSenhas-secret 
+              key: REDIS_HOST
+        ports:
+        - containerPort: {{ .Values.giropopsSenhas.service.port }}
+        imagePullPolicy: Always

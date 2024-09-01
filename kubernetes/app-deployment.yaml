@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: giropops-senhas
+  name: giropops-senhas
+spec:
+  replicas: 3  # Começando com 3 réplicas para lidar com 100 requisições por segundo
+  selector:
+    matchLabels:
+      app: giropops-senhas
+  template:
+    metadata:
+      labels:
+        app: giropops-senhas
+    spec:
+      containers:
+      - image: aguinho/giropops-senhas-pick:v1
+        name: giropops-senhas
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: giropops-senhas-secret # Secret criado o comando: kubectl create secret generic giropops-senhas-secret 
+              key: REDIS_HOST
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
