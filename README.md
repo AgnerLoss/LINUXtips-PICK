@@ -48,7 +48,7 @@ Chainguard ([Doc](https://www.chainguard.dev/)). Neste contexto, para verificaç
         
 ### 1.3 - Publicar a imagem Docker em um repositório privado.
 
-* Faz o pull ae... docker push aguinho/giropops-senhas-pick:v1   
+* Faz o pull ae... docker pull aguinho/giropops-senhas-pick:v1   
 
 ### 1.4 - Assinar as imagens Docker utilizando Cosign.  
 
