@@ -48,10 +48,73 @@ Chainguard ([Doc](https://www.chainguard.dev/)). Neste contexto, para verificaç
         
 ### 1.3 - Publicar a imagem Docker em um repositório privado.
 
-* Faz o pull ae... docker pull aguinho/giropops-senhas-pick:v1   
+* Faz o pull ae... docker push aguinho/giropops-senhas-pick:v1   
 
 ### 1.4 - Assinar as imagens Docker utilizando Cosign.  
 
 * A assinatura de imagens é uma camada a mais de segurança na gestão de imagens e containers, no projeto foi utilizado o 
  Cosign: Uma Ferramenta de Segurança DevOps para Assinar e Verificar Imagens de Container. 
  Cosign ([Doc](https://docs.sigstore.dev/signing/quickstart/))
+
+ Sábado, 31 de agosto de 2024, 20:28...
+    Vamos começar a orquestrar essa bagaça...
+
+## Orquestração do Kubernetes
+
+Antes de iniciar...da aquela conferida na documentação neste sistema fantástico open-sorce...
+ Kubernetes ([Doc](https://kubernetes.io/docs/home/))
+
+### Implementar a aplicação no Kubernetes.
+
+* Para implementação dos Containers Kubernetes...foram utilizadas algumas tecnologias locais e em nuvem, que serão resumidas e expostas a seguir:
+
+    -  Kind  ([Doc](https://kind.sigs.k8s.io/docs/user/quick-start/)) - O Kind é uma ferramenta gratuita que permite criar e gerenciar clusters Kubernetes locais usando contêineres Docker. O Kind foi desenvolvido principalmente para testar o Kubernetes, mas também pode ser usado para desenvolvimento local ou CI.
+
+    - LocalStack  ([Doc](https://docs.localstack.cloud/overview/)) - O LocalStack é um emulador de serviço de nuvem que roda em um único contêiner no seu laptop ou no seu ambiente de CI. Com o LocalStack, você pode rodar seus aplicativos AWS ou Lambdas inteiramente na sua máquina local sem se conectar a um provedor de nuvem remoto!
+
+    - eksctl  ([Doc](https://eksctl.io/))  - O eksctl é uma ferramenta de linha de comando (CLI) que permite criar e gerir clusters no Amazon Elastic Kubernetes Service (Amazon EKS). O Amazon EKS é um serviço gerenciado da Amazon Web Services (AWS) que permite executar o Kubernetes na nuvem da AWS e em datacenters locais. 
+
+-> Os manifestos do kubernetes estão dividos em 06 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. 
+
+
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/kubernetes.png">
+## Vamos começar a orquestração ... me acompanhe nesta viagem!!!! 
+
+-> Com os devidos arquivos devidamente configurados, partimos para criação do Cluster no ambiente da AWS através do eksctl e posterior deploy da aplicação e demais configurações diretamente no Cluster gerenciado pela AWS. O comando para configuração do cluster está descrito a seguir. (Obs: Comando deve ser configurado com a necessidade de cada usuário). O eksctl depende das configurações do AWS CLI - ([Doc](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)) 
+
+### Configuração do cluster na AWS: 
+
+eksctl create cluster --name=eks-cluster --version=1.24 --region=us-west-1 --nodegroup-name=eks-cluster-nodegroup --node-type=t3.medium --nodes=2 --nodes-min=1 --nodes-max=3 --managed
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/cluster.png">
+
+### Instalação do Ingress NGINX Controller
+
+Na AWS, o ingress controller é exposto através de um Network Load Balancer (NLB). O comando para instalação é:
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml
+
+### Instalação do CERT-MANAGER
+
+cert-manager  ([Doc](https://cert-manager.io/docs/))
+
+No caso do projeto o comando é:
+
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
+kubectl apply -f prod-issuer.yaml
+
+### Deploy da aplicação:
+
+Comandos: 
+
+Alias utilizado: k=kubectl
+
+Kubectl apply app-deployment.yaml
+Kubectl apply redis-deployment.yaml
+Kubectl apply app-service.yaml
+Kubectl apply redis-service.yaml
+Kubectl apply ingress.yaml
+
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/pods.png">
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/ingress.png">
+
+O ingress ja está configurado para inserção do certificado SSL da Let's Encrypt ... 
