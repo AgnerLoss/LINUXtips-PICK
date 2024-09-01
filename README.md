@@ -59,12 +59,12 @@ Chainguard ([Doc](https://www.chainguard.dev/)). Neste contexto, para verificaç
  Sábado, 31 de agosto de 2024, 20:28...
     Vamos começar a orquestrar essa bagaça...
 
-## Orquestração do Kubernetes
+## 2 - Orquestração do Kubernetes
 
 Antes de iniciar...da aquela conferida na documentação neste sistema fantástico open-sorce...
  Kubernetes ([Doc](https://kubernetes.io/docs/home/))
 
-### Implementar a aplicação no Kubernetes.
+### 2.1 Implementar a aplicação no Kubernetes.
 
 * Para implementação dos Containers Kubernetes...foram utilizadas algumas tecnologias locais e em nuvem, que serão resumidas e expostas a seguir:
 
@@ -79,22 +79,22 @@ Antes de iniciar...da aquela conferida na documentação neste sistema fantásti
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/kubernetes.png">
 
-## Vamos começar a orquestração ... me acompanhe nesta viagem!!!! 
+## 2.2 Vamos começar a orquestração ... me acompanhe nesta viagem!!!! 
 
 -> Com os devidos arquivos devidamente configurados, partimos para criação do Cluster no ambiente da AWS através do eksctl e posterior deploy da aplicação e demais configurações diretamente no Cluster gerenciado pela AWS. O comando para configuração do cluster está descrito a seguir. (Obs: Comando deve ser configurado com a necessidade de cada usuário). O eksctl depende das configurações do AWS CLI - ([Doc](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)) 
 
-### Configuração do cluster na AWS: 
+### 2.3 Configuração do cluster na AWS: 
 
 eksctl create cluster --name=eks-cluster --version=1.24 --region=us-west-1 --nodegroup-name=eks-cluster-nodegroup --node-type=t3.medium --nodes=2 --nodes-min=1 --nodes-max=3 --managed
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/cluster.png">
 
-### Instalação do Ingress NGINX Controller
+### 2.4 Instalação do Ingress NGINX Controller
 
 Na AWS, o ingress controller é exposto através de um Network Load Balancer (NLB). O comando para instalação é:
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml
 
-### Instalação do CERT-MANAGER
+### 2.5 Instalação do CERT-MANAGER
 
 cert-manager  ([Doc](https://cert-manager.io/docs/))
 
@@ -103,7 +103,7 @@ No caso do projeto o comando é:
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
 kubectl apply -f prod-issuer.yaml
 
-### Deploy da aplicação:
+### 2.6 Deploy da aplicação:
 
 Comandos: 
 
