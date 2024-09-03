@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  giropops-senhas:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-09-02T21:13:11.502697135-03:00"
+    description: Esse é o chart do Giropops-Senhas, utilizados nos laboratórios de
+      Kubernetes.
+    digest: 3ad15f4ed37c7624fae7c15d7c56a68c41b8599328421741a0f95577152e7dc2
+    name: giropops-senhas
+    sources:
+    - https://github.com/AgnerLoss/LINUXtips-PICK
+    urls:
+    - https://agnerloss.github.io/helm-charts/giropops-senhas-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-09-02T21:13:11.502284978-03:00"
