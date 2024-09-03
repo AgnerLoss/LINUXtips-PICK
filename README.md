@@ -119,3 +119,56 @@ Kubectl apply ingress.yaml
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/ingress.png">
 
 :love_you_gesture: O ingress ja está configurado para inserção do certificado SSL da Let's Encrypt ... 
+
+## 3 - Automação de Deploy com Helm:
+
+Helm  ([Doc](https://helm.sh/)) - Helm é um gerenciador de pacotes para Kubernetes. Ele usa 'gráficos' como formato de pacote, que é baseado em YAML. 
+
+### 3.1 - Criar um Chart Helm para a aplicação. 
+
+### 3.2 - Configurar valores dinâmicos para diferentes ambientes (dev, staging, prod).
+
+    Abrimos um parênteses aqui para discutir e entender qual melhor prática na configuração dos ambientes em HELM:
+
+    1  Arquivos Separados por Ambiente 
+    
+        Vantagens:
+
+        Clareza e Organização: Cada ambiente tem seu próprio arquivo de configuração, facilitando a manutenção e a leitura, principalmente em projetos grandes.
+        Menor Risco de Erros: Reduz o risco de aplicar configurações incorretas em ambientes diferentes, pois cada arquivo é dedicado a um ambiente específico.
+        Facilidade de Uso em CI/CD: É comum em pipelines CI/CD, onde os arquivos de configuração são usados diretamente para cada etapa (dev, staging, prod).
+
+        Desvantagens:
+
+        Redundância: Pode haver duplicação de configurações comuns em vários ambientes, aumentando o esforço de manutenção.
+        Complexidade na Sincronização: Se você precisar alterar um valor comum a todos os ambientes, será necessário alterar cada arquivo individualmente.
+
+
+    2  Um Único Arquivo com Seções para Cada Ambiente
+
+        Vantagens:
+
+            Centralização: Todas as configurações estão em um único local, facilitando a visualização e a comparação entre ambientes.
+            Menor Redundância: Configurações comuns podem ser definidas uma vez e reutilizadas, com apenas as diferenças especificadas para cada ambiente.
+            Fácil Gerenciamento: Alterações que afetam todos os ambientes são feitas em um único lugar.
+
+        Desvantagens:
+
+            Possível Confusão: Pode ser mais difícil de gerenciar, especialmente se o arquivo ficar muito grande e complexo.
+            Risco de Erros: Há o risco de aplicar a configuração errada a um ambiente se os valores não forem definidos corretamente ao executar os comandos.
+
+        Prática Mais Comum:
+
+            Projetos Pequenos/Médios: Geralmente, um único arquivo values.yaml com seções específicas para cada ambiente é usado, devido à simplicidade de manutenção e configuração.
+
+            Projetos Grandes/Corporativos: É comum separar os arquivos por ambiente (values-dev.yaml, values-staging.yaml, values-prod.yaml) para melhorar a organização e reduzir o risco de erros, especialmente em equipes grandes ou com processos CI/CD complexos.
+
+        Conclusão:
+            Se você busca simplicidade e está em um projeto menor, um único arquivo pode ser suficiente. Para projetos maiores ou em um ambiente corporativo, separar os arquivos é a prática mais comum e segura.
+   
+### 3.3 - Gerar pacotes Helm e armazenar em um repositório Helm privado.
+
+:love_you_gesture: https://agnerloss.github.io/helm-charts/
+
+
+

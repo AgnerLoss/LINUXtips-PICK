@@ -1,0 +1,39 @@
+
+giropopsSenhas:
+  name: "giropops-senhas"
+  image: "aguinho/giropops-senhas-pick:v1"
+  replicas: 2
+  labels:
+    app: "giropops-senhas"
+    env: "dev"
+  service:
+    type: "ClusterIP"
+    port: 5000
+    targetPort: 5000
+    name: "giropops-senhas-port"
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+
+redis:
+  image: "redis"
+  replicas: 1
+  labels:
+    app: "redis"
+    env: "dev"
+  service:
+    type: "ClusterIP"
+    port: 6379
+    targetPort: 6379
+    name: "redis-port"
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
