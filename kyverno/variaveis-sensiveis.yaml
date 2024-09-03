@@ -1,0 +1,22 @@
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-env-vars
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: check-sensitive-env-vars
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "Sensitive environment variables must be encrypted"
+      pattern:
+        spec:
+          containers:
+          - env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef: {}

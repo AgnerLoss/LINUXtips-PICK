@@ -170,5 +170,31 @@ Helm  ([Doc](https://helm.sh/)) - Helm é um gerenciador de pacotes para Kuberne
 
 :love_you_gesture: https://agnerloss.github.io/helm-charts/
 
+## 4 - Políticas de segurança do Kyverno:
+
+### 1. Verificação de Imagens Assinadas (check-signed-images)
+Propósito: Assegurar que apenas imagens assinadas podem ser usadas em Pods dentro do cluster.
+Como funciona: A política verifica se a imagem utilizada no Pod foi assinada digitalmente, utilizando uma chave pública específica.
+Chave Pública: A chave pública usada para verificar a assinatura foi incluída diretamente no arquivo da política.
+Exemplo de uso: Verifica que as imagens são válidas e assinadas antes de permitir a criação do Pod.
+
+### 2. Proibição de Execução como Root (disallow-run-as-root)
+Propósito: Prevenir que containers sejam executados com privilégios de root, aumentando a segurança do cluster.
+Como funciona: A política valida que todos os containers em um Pod estão configurados para não serem executados como root (runAsNonRoot: true).
+Exemplo de uso: Garante que as workloads sejam executadas com o menor privilégio necessário, reduzindo o risco de escalonamento de privilégios.
+
+### 3. Verificação de Variáveis de Ambiente Sensíveis (validate-env-vars)
+Propósito: Garantir que variáveis de ambiente sensíveis, como senhas, sejam configuradas de maneira segura.
+Como funciona: A política verifica se variáveis sensíveis, como PASSWORD, estão referenciando segredos (Secret) em vez de serem passadas diretamente como texto plano.
+Exemplo de uso: Protege contra a exposição acidental de dados sensíveis em variáveis de ambiente.
+
+### Como Aplicar e Gerenciar as Políticas:
+As políticas podem ser aplicadas ao cluster usando kubectl apply -f <policy-file>.yaml.
+Você pode listar as políticas aplicadas com kubectl get clusterpolicy e inspecionar cada uma com kubectl describe clusterpolicy <policy-name>.
+
+### Monitoramento e Conformidade:
+Use kubectl get clusterpolicyreport para ver relatórios sobre a aplicação das políticas e verificar a conformidade dos recursos no cluster.
+Essas políticas ajudam a garantir a segurança e conformidade do ambiente Kubernetes, protegendo contra práticas inseguras e validando a integridade das imagens e configurações usadas no cluster.
+
 
 

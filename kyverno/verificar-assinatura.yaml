@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: checar-imagem-assinada
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: check-image-signature
+    match:
+      resources:
+        kinds:
+        - Pod
+    verifyImages:
+    - image: "*"
+      key: |
+        -----BEGIN PUBLIC KEY-----
+        MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdF72JoC5hUMhSUfCcD4wXjLmOe31AFcDyypII88GfSZRY8+aao06A3abMhgd1Fa+n1i8zxe2GWzj7JCk2181kQ==
+        -----END PUBLIC KEY-----
+      attestors:
+      - count: 1
+        entries:
+        - keys:
+            publicKeys: |
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdF72JoC5hUMhSUfCcD4wXjLmOe31AFcDyypII88GfSZRY8+aao06A3abMhgd1Fa+n1i8zxe2GWzj7JCk2181kQ==
+              -----END PUBLIC KEY-----
