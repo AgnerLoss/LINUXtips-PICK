@@ -196,5 +196,42 @@ Você pode listar as políticas aplicadas com kubectl get clusterpolicy e inspec
 Use kubectl get clusterpolicyreport para ver relatórios sobre a aplicação das políticas e verificar a conformidade dos recursos no cluster.
 Essas políticas ajudam a garantir a segurança e conformidade do ambiente Kubernetes, protegendo contra práticas inseguras e validando a integridade das imagens e configurações usadas no cluster.
 
+ Sábado, 07 de setembro de 2024, 03:12...
+
+## Monitoramento com Prometheus:
+
+### Instalação:
+    No caso do projeto utilizamos:
+        git clone https://github.com/prometheus-operator/kube-prometheus
+        cd kube-prometheus
+        kubectl create -f manifests/setup
+        kubectl apply -f manifests/
+
+Kube-Prometheus  ([Doc](https://github.com/prometheus-operator/kube-prometheus)) - Este repositório coleta manifestos do Kubernetes, painéis do Grafana e regras do Prometheus combinados com documentação e scripts para fornecer monitoramento de cluster do Kubernetes de ponta a ponta e fácil de operar com o Prometheus usando o Prometheus Operator. 
+
+### Implementação de métricas customizadas na aplicação:
+   - A aplicação  está expondo métricas customizadas, e o Prometheus está coletando essas métricas corretamente. Configuramos para monitorar o número de requisições, uso de CPU, memória, e outros dados relevantes da aplicação.
+
+### Configuração do Prometheus para coletar e visualizar métricas:
+   - Ajustamos a configuração do Prometheus, resolvendo problemas na instalação via Helm.
+   - Foi configurado para coletar métricas da sua aplicação `giropops-senhas` e integrá-las ao sistema de monitoramento.
+
+### Criação de alertas baseados em métricas específicas da aplicação:
+   - Criamos três alertas no Prometheus:
+     - Alta quantidade de requisições: Para monitorar quando a carga de requisições ultrapassa um limite configurado.
+     - Verificação de disponibilidade do servidor**: Para garantir que o servidor da aplicação está online e respondendo.
+     - Monitoramento de CPU e memória: Para acompanhar o uso dos recursos da aplicação e gerar alertas em caso de uso excessivo.
+### Integração com Grafana
+
+    - Realizamos a integração com Grafana para gerar um dashboard customizável:
+
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/grafana.png">
+
+
+
+
+  
+
+
 
 
