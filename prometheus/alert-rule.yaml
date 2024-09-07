@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata: # Metadados do recurso (nome, namespace, labels)
+  name: giropops-prometheus-rule
+  namespace: monitoring
+  labels: # Labels do recurso
+    prometheus: k8s # Label que indica que o PrometheusRule será utilizado pelo Prometheus do Kubernetes
+    role: alert-rules # Label que indica que o PrometheusRule contém regras de alerta
+    app.kubernetes.io/name: kube-prometheus # Label que indica que o PrometheusRule faz parte do kube-prometheus
+    app.kubernetes.io/part-of: kube-prometheus # Label que indica que o PrometheusRule faz parte do kube-prometheus
+spec: # Especificação do recurso
+  groups: # Lista de grupos de regras
+  - name: giropops-prometheus-rule # Nome do grupo de regras
+    rules: # Lista de regras
+    - alert: GiropopsDown # Nome do alerta
+      expr: up{job="giropops"} == 0 # Expressão que será utilizada para disparar o alerta
+      for: 30s # Tempo que a expressão deve ser verdadeira para que o alerta seja disparado
+      labels: # Labels do alerta
+        severity: critical # Label que indica a severidade do alerta
+      annotations: # Anotações do alerta
+        summary: "Giropops is down" # Título do alerta
+        description: "Giropops is down for more than 30 segundos. Pod name: {{ $labels.pod }}" # Descrição do alerta
+
+    - alert: HighRequestRate # Nome do alerta
+      expr: rate(process_cpu_seconds_total [30s]) > 30 # Expressão que será utilizada para disparar o alerta
+      for: 30s # Tempo que a expressão deve ser verdadeira para que o alerta seja disparado
+      labels: # Labels do alerta
+        severity: warning # Label que indica a severidade do alerta
+      annotations: # Anotações do alerta
+        summary: "Giropops is receiving high request rate" # Título do alerta
+        description: "Giropops is receiving high request rate for more than 30 segundos. Pod name: {{ $labels.pod }}" # Descrição do alerta    
+
+    - alert: Criação de senhas # Nome do alerta
+      expr: rate(senha_gerada_total[30s]) # Expressão que será utilizada para disparar o alerta
+      for: 30s # Tempo que a expressão deve ser verdadeira para que o alerta seja disparado
+      labels: # Labels do alerta
+        severity: warning # Label que indica a severidade do alerta
+      annotations: # Anotações do alerta
+        summary: "Senhas geradas" # Título do alerta
+        description: "Senhas geradas. Pod name: {{ $labels.pod }}" #     

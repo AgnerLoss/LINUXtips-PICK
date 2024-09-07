@@ -4,6 +4,10 @@ metadata:
   name: giropops-senhas
   labels:
     app: giropops-senhas
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "5000"  # Porta onde o Prometheus irá coletar as métricas
+    prometheus.io/path: "/metrics"  # Path das métricas
 spec:
   selector:
     app: giropops-senhas
@@ -13,3 +17,4 @@ spec:
       targetPort: 5000
       name: tcp-app
   type: ClusterIP
+

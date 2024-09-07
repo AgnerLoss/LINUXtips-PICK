@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: giropops-senhas
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"  # Porta onde as métricas estão expostas
+        prometheus.io/path: "/metrics"  # Path onde o Prometheus coleta as métricas
     spec:
       containers:
       - image: aguinho/giropops-senhas-pick:v1
@@ -28,7 +32,7 @@ spec:
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
-              name: giropops-senhas-secret # Secret criado o comando: kubectl create secret generic giropops-senhas-secret 
+              name: giropops-senhas-secret # Secret criado com o comando: kubectl create secret generic giropops-senhas-secret 
               key: REDIS_HOST
         ports:
         - containerPort: 5000

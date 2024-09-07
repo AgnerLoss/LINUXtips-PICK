@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: giropops-senhas-monitor  
+spec:
+  selector:
+    matchLabels:
+      app: giropops-senhas
+  endpoints:
+    - port: tcp-app  # Nome da porta no Service
+      path: /metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - default  # Namespace onde a aplicação está rodando
+
+   
+  
