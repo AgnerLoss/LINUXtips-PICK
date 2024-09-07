@@ -74,7 +74,7 @@ Antes de iniciar...da aquela conferida na documentação neste sistema fantásti
 
     - eksctl  ([Doc](https://eksctl.io/))  - O eksctl é uma ferramenta de linha de comando (CLI) que permite criar e gerir clusters no Amazon Elastic Kubernetes Service (Amazon EKS). O Amazon EKS é um serviço gerenciado da Amazon Web Services (AWS) que permite executar o Kubernetes na nuvem da AWS e em datacenters locais. 
 
-:love_you_gesture: Os manifestos do kubernetes estão dividos em 06 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. 
+:love_you_gesture: Os manifestos do kubernetes estão dividos em 07 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. Um ClusterIssuer responsável pelo certificado e um HPA ([Doc](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) - O HorizontalPodAutoscaler atualiza automaticamente um recurso de carga de trabalho (como umImplantaçãoou Conjunto com estado), com o objetivo de dimensionar automaticamente a carga de trabalho para atender à demanda.
 
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/kubernetes.png">
@@ -100,20 +100,20 @@ cert-manager  ([Doc](https://cert-manager.io/docs/))
 
 No caso do projeto o comando é:
 
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
-kubectl apply -f prod-issuer.yaml
++ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
++ kubectl apply -f prod-issuer.yaml
 
 ### 2.6 Deploy da aplicação:
 
 Comandos: 
 
-Alias utilizado: k=kubectl
++ Alias utilizado: k=kubectl
 
-Kubectl apply app-deployment.yaml
-Kubectl apply redis-deployment.yaml
-Kubectl apply app-service.yaml
-Kubectl apply redis-service.yaml
-Kubectl apply ingress.yaml
++ Kubectl apply app-deployment.yaml
++ Kubectl apply redis-deployment.yaml
++ Kubectl apply app-service.yaml
++ Kubectl apply redis-service.yaml
++ Kubectl apply ingress.yaml
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/pods.png">
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/ingress.png">
