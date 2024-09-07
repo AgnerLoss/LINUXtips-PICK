@@ -227,6 +227,17 @@ Kube-Prometheus  ([Doc](https://github.com/prometheus-operator/kube-prometheus))
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/grafana.png">
 
+### Ferramenta de "stress teste" ...
+
+    Durante todo projeto foi utilizada a ferramenta Locust - Ferramenta de teste de carga de código aberto. 
+Locust ([Doc](https://locust.io/)) 
+
+### "Fritando o container" 
+
+<img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/locust.png">
+
+
+
 
 
 
