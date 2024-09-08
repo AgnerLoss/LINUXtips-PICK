@@ -239,8 +239,3 @@ Locust ([Doc](https://locust.io/))
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/locust.png">
   
-
-
-
- git config --global user.email "you@example.com"
- git config --global user.name "Your Name"
