@@ -74,7 +74,7 @@ Antes de iniciar...da aquela conferida na documentação neste sistema fantásti
 
     - eksctl  ([Doc](https://eksctl.io/))  - O eksctl é uma ferramenta de linha de comando (CLI) que permite criar e gerir clusters no Amazon Elastic Kubernetes Service (Amazon EKS). O Amazon EKS é um serviço gerenciado da Amazon Web Services (AWS) que permite executar o Kubernetes na nuvem da AWS e em datacenters locais. 
 
-:love_you_gesture: Os manifestos do kubernetes estão dividos em 07 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. Um ClusterIssuer responsável pelo certificado e um HPA ([Doc](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) - O HorizontalPodAutoscaler atualiza automaticamente um recurso de carga de trabalho (como umImplantaçãoou Conjunto com estado), com o objetivo de dimensionar automaticamente a carga de trabalho para atender à demanda.
+:love_you_gesture: Os manifestos do kubernetes estão dividos em 07 partes. Deployments do app e do redis, que possuem as configurações de containers como quantidade de réplicas, portas, políticas, limites de recursos, entre outros. Services do app e redis, que são responsáveis pela exposição e comunicação dentro do cluster. Ingress que é responsável por gerenciar o acesso externo aos serviços dentro de um cluster. No nosso caso, utilizaremos o controlador de Ingress da NGINX. Um ClusterIssuer responsável pelo certificado e um HPA ([Doc](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) - O HorizontalPodAutoscaler atualiza automaticamente um recurso de carga de trabalho (como uma implantação ou conjunto com estado), com o objetivo de dimensionar automaticamente a carga de trabalho para atender à demanda.
 
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/kubernetes.png">
@@ -103,8 +103,10 @@ No caso do projeto o comando é:
 + kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
 + kubectl apply -f prod-issuer.yaml
 
+A certificadora utilizada no projeto foi a Let's Encripty. ([Doc](https://letsencrypt.org/pt-br/docs/) - A Let’s Encrypt é uma autoridade certificadora (AC) gratuita, automatizada e aberta que opera em prol do benefício público. É um serviço provido pela Internet Security Research Group (ISRG).
+ 
 ### 2.6 Deploy da aplicação:
-
+    
 Comandos: 
 
 + Alias utilizado: k=kubectl
@@ -114,6 +116,7 @@ Comandos:
 + Kubectl apply app-service.yaml
 + Kubectl apply redis-service.yaml
 + Kubectl apply ingress.yaml
++ Kubectl apply giropops-hpa.yaml
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/pods.png">
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/ingress.png">
@@ -235,14 +238,9 @@ Locust ([Doc](https://locust.io/))
 ### "Fritando o container" 
 
 <img src="https://github.com/AgnerLoss/LINUXTIPS-PICK/blob/main/imagens/locust.png">
-
-
-
-
-
-
   
 
 
 
-
+ git config --global user.email "you@example.com"
+ git config --global user.name "Your Name"
